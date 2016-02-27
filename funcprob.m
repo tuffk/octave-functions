@@ -64,6 +64,8 @@ intervalo 	[1-2)	[2,5)
 funcion 	x		x^2
 %} 
 #para acceder un elemento del un cell array se usa y{2,2}
+#para integrar usar la funcion quadgk(funcion,inicio,fin) por ejemplo quadgk(@(x) x.^2,0,1)
+#combinalo con el cell array quadgk(y{2,1},0,1)
 function [x,y] = cont(a,b)
 
 	disp("funcion continua")
