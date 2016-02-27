@@ -17,7 +17,7 @@ function [x,y] = disc(a,b)
 	disp("funcion dicreta")
 	x=0;y=0;kuz=0;
 	while(x!=1)
-	x=menu("selecciona una opcion", "salir","probabilidad en un punto","probabilidad en un rango en un rango");
+	x=menu("selecciona una opcion", "salir","probabilidad en un punto","probabilidad en un rango");
 	switch(x)
 	case 2
 	{
@@ -63,11 +63,38 @@ que corresponderia a
 intervalo 	[1-2)	[2,5)
 funcion 	x		x^2
 %} 
-#para acceder un elemento del un cell array se usa y{2,2}
+#para acceder un elemento del un cell array se usa y{2,2}; si es un vector y{1,1}(1)
 #para integrar usar la funcion quadgk(funcion,inicio,fin) por ejemplo quadgk(@(x) x.^2,0,1)
 #combinalo con el cell array quadgk(y{2,1},0,1)
 function [x,y] = cont(a,b)
 
 	disp("funcion continua")
+	x=0;
+	while(x!=1)
+		x= menu("selecciona una opciona","salir","probabilidad en un punto","probabilidad en un rango")
+		switch(x)
+			case 2
+				
+			case 3
+				kuz=input("inicio intervalo (incluyente)");
+				sharmuta=input("fin intervalo (incluyente)");
+				tot =0; comi = kuz; fin = sharmuta;
+				[f,c]=size(a);
+				i=1;
+				while (i<c)
+					if comi < a{1,i}(1)
+						comi = a{1,i}(1);
+					endif
+					if fin > a{1,i}(2)
+						fin = a{1,i}(2);
+					else
+						fin = sharmuta;
+					endif
+					tot += quadgk(y{2,i},comi,fin);
+					i+=1;
+				endwhile
+		otherwise
+		endswitch
+	endwhile;
 
 end;
