@@ -3,6 +3,7 @@ function [x,y] = funcprob(a,b,opt)
 if(strcmpi(opt,"c") && strcmpi(class(a),"cell"))
 	cont(a,b)
 elseif(strcmpi(opt,"d"))
+	disp("debugaso")
 	disc(a,b)
 else
 	disp("opcion invalida detectada")
@@ -55,13 +56,14 @@ end;
 #funcion llamada cuando la funcion dada es continua
 %{
 el input (la tabla de funciones e intervalos) debe darse en forma de
-cell (clase de octave) en la que el intervalo este dado en la fila 1 y la funcion correspondiente en la fila 2
+cell (clase de octave) en la que el intervalo este dado en la fila 1 y la funcion correspondiente en la fila 2 (en formato de funcion de octave)
 por ejemplo
-y={[1,2],[2,5];"x","x^2"}
+y={[1,2],[2,5];@(x) x,@(x) x.^2}
 que corresponderia a
 intervalo 	[1-2)	[2,5)
 funcion 	x		x^2
 %} 
+#para acceder un elemento del un cell array se usa y{2,2}
 function [x,y] = cont(a,b)
 
 	disp("funcion continua")
