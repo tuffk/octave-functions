@@ -3,6 +3,7 @@
 
 function s = ContinuousFunctions()
 
+	%{
     Y = {[1,2],[2,5];@(x) 1,@(x) 2};
     A = 1;
     B = 5;
@@ -35,6 +36,7 @@ function s = ContinuousFunctions()
     %Cumulative function
     Y = {[1,10];@(x) x.^3.+x.^2};
     disp(getCumulativeFunction(Y));
+    %}
 end
 
 
@@ -62,6 +64,7 @@ function s = evalPoint(Y,A)
 
 	[rows,columns] = size(Y);
     s = 0;
+    
 	for (i = 1 : columns)
 
 		interval = Y{1,i};

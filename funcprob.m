@@ -1,5 +1,8 @@
 function [x,y] = funcprob(a,b,opt)
 
+source("ContinuousFunctions.m")
+source("DscreteFunctions.m")
+
 if(strcmpi(opt,"c") && strcmpi(class(a),"cell"))
 	cont(a,b)
 elseif(strcmpi(opt,"d"))
@@ -12,45 +15,33 @@ end;
 
 
 #funcion llamada cuando la funcion dada es discreta
+
 function [x,y] = disc(a,b)
 
 	disp("funcion dicreta")
 	x=0;y=0;kuz=0;
 	while(x!=1)
-	x=menu("selecciona una opcion", "salir","probabilidad en un punto","probabilidad en un rango");
+	x=menu("selecciona una opcion", "salir","probabilidad en un punto","probabilidad en un rango","funcion acumulada");
 	switch(x)
 	case 2
-	{
+	
 		kuz=input("en que punto?");
-		kuz;
-		xx=nan;
-for t = a(1,:)
-			if(kuz == t)
-				xx = a(2,t);
-				break;
-			endif;
-		endfor;
-		printf("la probabilidad en %d es: %d \n",kuz,xx)
-		}
+		onePointD(a,kuz);
+		
 		case 3
-		{
-			kuz=input("inicio intervalo (incluyente)");
-			sharmuta=input("fin intervalo (incluyente)");
-			tot=0;
-			for t = kuz:sharmuta
-				for r = a(1,:)
-					if t ==r
-						tot+= a(2,r);
-					endif;
-				endfor;
-			endfor;
-			printf("la probabilidad del intervalo (%d<=x<=%d) es: %d\n",kuz,sharmuta,tot);
-		}
+		kuz=input("inicio intervalo (incluyente)");
+		sharmuta=input("fin intervalo (incluyente)");
+			acumD(a,kuz,sharmuta);
+			
+		case 4
+		acumulamela(a);
+		
 		otherwise
 	endswitch;
 	endwhile;
 
 end;
+
 
 
 #funcion llamada cuando la funcion dada es continua
@@ -71,13 +62,16 @@ function [x,y] = cont(a,b)
 	disp("funcion continua")
 	x=0;
 	while(x!=1)
-		x= menu("selecciona una opciona","salir","probabilidad en un punto","probabilidad en un rango")
+		x= menu("selecciona una opciona","salir","probabilidad en un punto","probabilidad en un rango","grafica la funcion de distribucion de probabilidad","grafica la funcion de densidad de probabilidad")
 		switch(x)
 			case 2
-				
+			
+			kuz = input("punto en el que deseas evaluar");
+				disp(evalPoint(a,kuz));
 			case 3
 				kuz=input("inicio intervalo (incluyente)");
 				sharmuta=input("fin intervalo (incluyente)");
+				%{
 				tot =0; comi = kuz; fin = sharmuta;
 				[f,c]=size(a);
 				i=1;
@@ -90,9 +84,23 @@ function [x,y] = cont(a,b)
 					else
 						fin = sharmuta;
 					endif
-					tot += quadgk(y{2,i},comi,fin);
+					tot += quadgk(a{2,i},comi,fin);
 					i+=1;
 				endwhile
+				disp(tot);
+				%}
+				disp(evalInterval(a,kuz,sharmuta));
+				case 4
+					kuz=input("inicio intervalo (incluyente)");
+					sharmuta=input("fin intervalo (incluyente)");
+					[x,y] = getPF(a,kuz,sharmuta);
+					plot(x,y,'r');
+					
+				case 5
+					kuz=input("inicio intervalo (incluyente)");
+					sharmuta=input("fin intervalo (incluyente)");
+					[x,y] = getPDF(a,kuz,sharmuta);
+					plot(x,y,'r');
 		otherwise
 		endswitch
 	endwhile;
