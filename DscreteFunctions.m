@@ -3,7 +3,7 @@ function s = DescreteFunctions(a,b)
 end
 
 function xx = onePointD(a,kuz)
-	xx=0;	
+	xx=0.0;	
 	
 	[f,c] = size(a);
 	for tac = 1:c
@@ -12,10 +12,11 @@ function xx = onePointD(a,kuz)
 		endif
 	endfor;
 	printf("la probabilidad en %d es: %d \n",kuz,xx);
+	xx
 end
 
 function s = acumD(a, kuz, sharmuta)
-	tot=0;zain=1;
+	tot=0.0;zain=1;
 		for r = a(1,:)
 		r;
 			if (r>=kuz && r<=sharmuta)
@@ -24,6 +25,7 @@ function s = acumD(a, kuz, sharmuta)
 			zain+=1;
 		endfor;
 	printf("la probabilidad del intervalo (%d<=x<=%d) es: %d\n",kuz,sharmuta,tot);
+	tot
 	
 end
 
