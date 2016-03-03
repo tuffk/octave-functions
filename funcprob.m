@@ -21,7 +21,7 @@ function [x,y] = disc(a,b)
 	disp("funcion dicreta")
 	x=0;y=0;kuz=0;
 	while(x!=1)
-	x=menu("selecciona una opcion", "salir","probabilidad en un punto","probabilidad en un rango","funcion acumulada");
+	x=menu("selecciona una opcion", "salir","probabilidad en un punto","probabilidad en un rango","funcion acumulada","funcion de distrubucion");
 	switch(x)
 	case 2
 	
@@ -35,6 +35,9 @@ function [x,y] = disc(a,b)
 			
 		case 4
 		acumulamela(a);
+		
+		case 5
+		bar(a(1,:),a(2,:),'g')
 		
 		otherwise
 	endswitch;
@@ -62,40 +65,22 @@ function [x,y] = cont(a,b)
 	disp("funcion continua")
 	x=0;
 	while(x!=1)
-		x= menu("selecciona una opciona","salir","probabilidad en un punto","probabilidad en un rango","grafica la funcion de distribucion de probabilidad","grafica la funcion de densidad de probabilidad")
+		x= menu("selecciona una opciona","salir","probabilidad en un punto","probabilidad en un rango","grafica la funcion de distribucion de probabilidad","grafica la funcion de densidad de probabilidad");
 		switch(x)
 			case 2
 			
 			kuz = input("punto en el que deseas evaluar");
-				disp(evalPoint(a,kuz));
+				%disp(evalPoint(a,kuz));
+				disp("la integral es 0");
 			case 3
 				kuz=input("inicio intervalo (incluyente)");
 				sharmuta=input("fin intervalo (incluyente)");
-				%{
-				tot =0; comi = kuz; fin = sharmuta;
-				[f,c]=size(a);
-				i=1;
-				while (i<c)
-					if comi < a{1,i}(1)
-						comi = a{1,i}(1);
-					endif
-					if fin > a{1,i}(2)
-						fin = a{1,i}(2);
-					else
-						fin = sharmuta;
-					endif
-					tot += quadgk(a{2,i},comi,fin);
-					i+=1;
-				endwhile
-				disp(tot);
-				%}
 				disp(evalInterval(a,kuz,sharmuta));
 				case 4
 					kuz=input("inicio intervalo (incluyente)");
 					sharmuta=input("fin intervalo (incluyente)");
 					[x,y] = getPF(a,kuz,sharmuta);
 					plot(x,y,'r');
-					
 				case 5
 					kuz=input("inicio intervalo (incluyente)");
 					sharmuta=input("fin intervalo (incluyente)");

@@ -11,8 +11,7 @@ function xx = onePointD(a,kuz)
 			xx = a(2,tac);
 		endif
 	endfor;
-	printf("la probabilidad en %d es: %d \n",kuz,xx);
-	xx
+	printf("la probabilidad en %d es: %f \n",kuz,xx);
 end
 
 function s = acumD(a, kuz, sharmuta)
@@ -24,13 +23,16 @@ function s = acumD(a, kuz, sharmuta)
 			endif;
 			zain+=1;
 		endfor;
-	printf("la probabilidad del intervalo (%d<=x<=%d) es: %d\n",kuz,sharmuta,tot);
-	tot
-	
+	printf("la probabilidad del intervalo (%d<=x<=%d) es: %f\n",kuz,sharmuta,tot);
+	s=tot;
 end
 
 function s= acumulamela(a)
+	x=[];
+	modishness = min(a(1,:));
+	tzitzim = max(a(1,:));
 	for t = a(1,:)
-	
+		x=[x,acumD(a,modishness,t)];
 	endfor
+	bar(a(1,:),x,'g');
 end

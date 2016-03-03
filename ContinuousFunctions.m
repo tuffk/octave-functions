@@ -52,12 +52,12 @@ function s = evalInterval(Y,A,B)
 		iStart = interval(1);
 		iEnd = interval(2);
 		if (iStart <= B && iEnd >= A)
-			if (iStart < A) iStart = A; end
-			if (iEnd > B) iEnd = B; end
+			if (iStart < A) iStart = A; end;
+			if (iEnd > B) iEnd = B; end;
 			s += quadgk(Y{2,i},iStart,iEnd);
-		end
-	end
-end
+		end;
+	end;
+end;
 
 
 function s = evalPoint(Y,A)
@@ -73,29 +73,27 @@ function s = evalPoint(Y,A)
 		if (iStart <= A && iEnd >= A)
 			s = feval(Y{2,i},A);
 			break;
-		end
-	end
-end
+		end;
+	end;
+end;
 
 function [x,y] = getPF(Y,A,B)
     x = [A:0.1:B];
     len = size(x,2);
     y = zeros(1,len);
-
-    for (i = 1:len)
+    for (i = 1:len);
         y(i) = evalPoint(Y,x(i));
-    end
-end
+    end;
+end;
 
 function [x,y] = getPDF(Y,A,B)
     x = [A:0.1:B];
     len = size(x,2);
     y = zeros(1,len);
-
     for (i = 1:len)
         y(i) = evalInterval(Y,-inf,x(i));
-    end
-end
+    end;
+end;
 
 function s = getCumulativeFunction(Y)
 
@@ -107,7 +105,7 @@ function s = getCumulativeFunction(Y)
 		interval = Y{1,i};
 		iStart = interval(1);
 		iEnd = interval(2);
-        [x,y] = getPDF(Y,iStart,iEnd);
+      [x,y] = getPDF(Y,iStart,iEnd);
 
         s = polyfit(x,y,5);
         poly = "";
@@ -117,8 +115,8 @@ function s = getCumulativeFunction(Y)
             coef = round(s(j)*100)/100;
             if (coef != 0)
                 poly = cstrcat(poly,num2str(coef,'%+f'),"x^", num2str(pColumns-j)," ");
-            end
-        end
+            end;
+        end;
         s = poly;
-    end
-end
+    end;
+end;
