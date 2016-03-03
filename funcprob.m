@@ -79,13 +79,13 @@ function [x,y] = cont(a,b)
 				case 4
 					kuz=input("inicio intervalo (incluyente)");
 					sharmuta=input("fin intervalo (incluyente)");
-					[x,y] = getPF(a,kuz,sharmuta);
-					plot(x,y,'r');
+					[X,y] = getPF(a,kuz,sharmuta);
+					plot(X,y,'r');
 				case 5
 					kuz=input("inicio intervalo (incluyente)");
 					sharmuta=input("fin intervalo (incluyente)");
-					[x,y] = getPDF(a,kuz,sharmuta);
-					plot(x,y,'r');
+					[X,y] = getPDF(a,kuz,sharmuta);
+					plot(X,y,'r');
 		otherwise
 		endswitch
 	endwhile;
