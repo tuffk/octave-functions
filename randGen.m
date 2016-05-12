@@ -1,5 +1,5 @@
 function x = randGen(D,arr)
-
+	D=toupper(D);
     switch (D)
         case "M"
             x = exprnd(arr(1));
