@@ -7,8 +7,9 @@ function [l,lq,w,wq] = cola(DE,DS,S,d1p,d2p,T)
 		#sumale+= exprnd(1);
 		llegale(end+1) = sumale;
 	endwhile
-	disp(llegale)
 	#disp(llegale);
+	sumita1=0; # acumula el tamaño de la cola 
+	sumita2 =0; # acumula los servidores ocupados
 	zain =0;#es el itmepo !!!
 	tajat = 0; # es la cola
 	
@@ -52,9 +53,26 @@ function [l,lq,w,wq] = cola(DE,DS,S,d1p,d2p,T)
 		%}
 		
 		
+		sumita1+=tajat;
+		for s = esperame
+			if s > 0
+				sumita2 +=1;
+			endif
+		endfor
+		
 		
 		zain+=1;
 	endwhile
+	
+	#estadistica
+		#lq
+		lq = sumita1/zain;
+		#disp("lq")
+		# L
+		L= sumita2/zain;
+		#W
+		
+		
 end
 
 function x = revisamela(act,rev)
@@ -65,3 +83,5 @@ function x = revisamela(act,rev)
 	x=0; 
 	return
 end
+
+#cola("m","m",1,[5],[3],2000) 
