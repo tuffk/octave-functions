@@ -69,7 +69,7 @@ function [l,lq,w,wq] = cola(DE,DS,S,d1p,d2p,T)
 		lq = sumita1/zain;
 		#disp("lq")
 		# L
-		L= sumita2/zain;
+		l= sumita2/zain;
 		#W
 		
 		
